@@ -16,6 +16,7 @@ export const initialNodes = [
     position: { x: 0, y: 200 },
     data: { label: "with React Flow" },
   },
+  { id: "e", position: { x: 200, y: 200 }, data: { label: "I WANNA SCREAM" } },
 ] satisfies Node[];
 
 export const nodeTypes = {
