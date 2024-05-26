@@ -1,46 +1,4 @@
-// import type { OnConnect } from "reactflow";
 
-// import { useCallback } from "react";
-// import {
-//   Background,
-//   Controls,
-//   MiniMap,
-//   ReactFlow,
-//   addEdge,
-//   useNodesState,
-//   useEdgesState,
-// } from "reactflow";
-
-// import "reactflow/dist/style.css";
-
-// import { initialNodes, nodeTypes } from "./nodes";
-// import { initialEdges, edgeTypes } from "./edges";
-
-// export default function App() {
-//   const [nodes, , onNodesChange] = useNodesState(initialNodes);
-//   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-//   const onConnect: OnConnect = useCallback(
-//     (connection) => setEdges((edges) => addEdge(connection, edges)),
-//     [setEdges]
-//   );
-
-//   return (
-//     <ReactFlow
-//       nodes={nodes}
-//       nodeTypes={nodeTypes}
-//       onNodesChange={onNodesChange}
-//       edges={edges}
-//       edgeTypes={edgeTypes}
-//       onEdgesChange={onEdgesChange}
-//       onConnect={onConnect}
-//       fitView
-//     >
-//       <Background />
-//       <MiniMap />
-//       <Controls />
-//     </ReactFlow>
-//   );
-// }
 
 import React, { useCallback } from 'react';
 import ReactFlow, { useNodesState, useEdgesState, addEdge } from 'reactflow';
@@ -48,112 +6,83 @@ import 'reactflow/dist/style.css';
 
 const initialNodes = [
   {
-    id: 'horizontal-1',
+    id: 'a1',
+    draggable: false,
     sourcePosition: 'right',
     type: 'input',
-    data: { label: 'Input' },
-    position: { x: 0, y: 80 },
+    data: { label: 'EESA09' },
+    position: { x: 0, y: 0 },
   },
   {
-    id: 'horizontal-2',
+    id: 'a2',
+    draggable: false,
+    sourcePosition: 'right',
+    targetPosition: 'bottom',
+    data: { label: 'MATA30' },
+    position: { x: 0, y: 100 },
+  },
+  {
+    id: 'a3',
+    draggable: false,
+    type: 'input',
+    sourcePosition: 'top',
+    data: { label: 'PHYA10' },
+    position: { x: 0, y: 200 },
+  },
+  {
+    id: 'b1',
+    draggable: false,
     sourcePosition: 'right',
     targetPosition: 'left',
-    data: { label: 'A Node' },
+    data: { label: 'EESB03' },
     position: { x: 250, y: 0 },
   },
   {
-    id: 'horizontal-3',
+    id: 'b2',
+    draggable: false,
+    type: 'input',
     sourcePosition: 'right',
-    targetPosition: 'left',
-    data: { label: 'Node 3' },
-    position: { x: 250, y: 160 },
+    data: { label: 'STAB22'},
+    position: { x: 250, y: 100 },
   },
   {
-    id: 'horizontal-4',
+    id: 'b3',
+    draggable: false,
+    type: 'input',
     sourcePosition: 'right',
-    targetPosition: 'left',
-    data: { label: 'Node 4' },
-    position: { x: 500, y: 0 },
+    data: { label: 'EESB15' },
+    position: { x: 250, y: 200 },
   },
   {
-    id: 'horizontal-5',
-    sourcePosition: 'top',
-    targetPosition: 'bottom',
-    data: { label: 'Node 5' },
-    position: { x: 500, y: 100 },
-  },
-  {
-    id: 'horizontal-6',
-    sourcePosition: 'bottom',
-    targetPosition: 'top',
-    data: { label: 'Node 6' },
-    position: { x: 500, y: 230 },
-  },
-  {
-    id: 'horizontal-7',
+    id: 'b4',
+    draggable: false,
+    type: 'input',
     sourcePosition: 'right',
-    targetPosition: 'left',
-    data: { label: 'Node 7' },
-    position: { x: 750, y: 50 },
-  },
-  {
-    id: 'horizontal-8',
-    sourcePosition: 'right',
-    targetPosition: 'left',
-    data: { label: 'Node 8' },
-    position: { x: 750, y: 300 },
+    data: { label: 'EESB18' },
+    position: { x: 250, y: 300 },
   },
 ];
 
 const initialEdges = [
   {
-    id: 'horizontal-e1-2',
-    source: 'horizontal-1',
-    type: 'smoothstep',
-    target: 'horizontal-2',
+    id: 'a1-b1',
+    source: 'a1',
+    type: 'bezier',
+    target: 'b1',
     animated: true,
   },
   {
-    id: 'horizontal-e1-3',
-    source: 'horizontal-1',
-    type: 'smoothstep',
-    target: 'horizontal-3',
+    id: 'a2-b1',
+    source: 'a2',
+    type: 'bezier',
+    target: 'b1',
     animated: true,
   },
   {
-    id: 'horizontal-e1-4',
-    source: 'horizontal-2',
-    type: 'smoothstep',
-    target: 'horizontal-4',
-    label: 'edge label',
-  },
-  {
-    id: 'horizontal-e3-5',
-    source: 'horizontal-3',
-    type: 'smoothstep',
-    target: 'horizontal-5',
-    animated: true,
-  },
-  {
-    id: 'horizontal-e3-6',
-    source: 'horizontal-3',
-    type: 'smoothstep',
-    target: 'horizontal-6',
-    animated: true,
-  },
-  {
-    id: 'horizontal-e5-7',
-    source: 'horizontal-5',
-    type: 'smoothstep',
-    target: 'horizontal-7',
-    animated: true,
-  },
-  {
-    id: 'horizontal-e6-8',
-    source: 'horizontal-6',
-    type: 'smoothstep',
-    target: 'horizontal-8',
-    animated: true,
+    id: 'a3-a2',
+    source: 'a3',
+    type: 'bezier',
+    target: 'a2',
   },
 ];
 
