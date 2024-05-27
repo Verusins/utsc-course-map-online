@@ -1,8 +1,10 @@
 
 
-import React, { useCallback } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import ReactFlow, { useNodesState, useEdgesState, addEdge } from 'reactflow';
 import 'reactflow/dist/style.css';
+
+import './updatenode.css';
 
 const initialNodes = [
   {
@@ -87,9 +89,33 @@ const initialEdges = [
 ];
 
 const HorizontalFlow = () => {
-  const [nodes, _, onNodesChange] = useNodesState(initialNodes);
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const onConnect = useCallback((params) => setEdges((els) => addEdge(params, els)), []);
+
+  const [nodeHidden, setNodeHidden] = useState(false);
+
+  useEffect(() => {
+    setNodes((nds) =>
+      nds.map((node) => {
+        if (node.id === 'b1') {
+          // when you update a simple type you can just update the value
+          node.hidden = nodeHidden;
+        }
+
+        return node;
+      })
+    );
+    setEdges((eds) =>
+      eds.map((edge) => {
+        if (edge.id === 'a1-b1') {
+          edge.hidden = nodeHidden;
+        }
+
+        return edge;
+      })
+    );
+  }, [nodeHidden, setNodes, setEdges]);
 
   return (
     <ReactFlow
@@ -100,7 +126,18 @@ const HorizontalFlow = () => {
       onConnect={onConnect}
       fitView
       attributionPosition="bottom-left"
-    ></ReactFlow>
+    >
+      <div className="updatenode__controls">
+        <div className="updatenode__checkboxwrapper">
+          <label>hidden:</label>
+          <input
+            type="checkbox"
+            checked={nodeHidden}
+            onChange={(evt) => setNodeHidden(evt.target.checked)}
+          />
+        </div>
+      </div>
+    </ReactFlow>
   );
 };
 
