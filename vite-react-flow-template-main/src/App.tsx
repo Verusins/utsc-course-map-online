@@ -63,9 +63,79 @@ const initialNodes = [
     data: { label: 'EESB18' },
     position: { x: 250, y: 300 },
   },
+  {
+    id: 'c1',
+    draggable: false,
+    type: 'input',
+    sourcePosition: 'right',
+    data: { label: 'EESC03' },
+    position: { x: 500, y: 0 },
+  },
+  {
+    id: 'c2',
+    draggable: false,
+    type: 'input',
+    sourcePosition: 'right',
+    data: { label: 'EESC13' },
+    position: { x: 500, y: 100 },
+  },
+  {
+    id: 'c3',
+    draggable: false,
+    type: 'output',
+    targetPosition: 'left',
+    data: { label: 'EESC19' },
+    position: { x: 500, y: 200 },
+  },
+  {
+    id: 'c4',
+    draggable: false,
+    type: 'output',
+    targetPosition: 'left',
+    data: { label: 'EESC25' },
+    position: { x: 500, y: 300 },
+  },
+  {
+    id: 'd1',
+    draggable: false,
+    type: 'output',
+    targetPosition: 'left',
+    data: { label: 'EESD06' },
+    position: { x: 750, y: -50 },
+  },
+  {
+    id: 'd2',
+    draggable: false,
+    type: 'output',
+    targetPosition: 'left',
+    data: { label: 'EESD31' },
+    position: { x: 750, y: 50 },
+  },
+  {
+    id: 'd3',
+    draggable: false,
+    type: 'output',
+    targetPosition: 'left',
+    data: { label: 'ESTD19' },
+    position: { x: 750, y: 150 },
+  },
+  {
+    id: 'd4',
+    draggable: false,
+    type: 'output',
+    targetPosition: 'left',
+    data: { label: 'EESD28' },
+    position: { x: 750, y: 250 },
+  },
 ];
 
 const initialEdges = [
+  {
+    id: 'a3-a2',
+    source: 'a3',
+    type: 'bezier',
+    target: 'a2',
+  },
   {
     id: 'a1-b1',
     source: 'a1',
@@ -81,10 +151,67 @@ const initialEdges = [
     animated: true,
   },
   {
-    id: 'a3-a2',
-    source: 'a3',
+    id: 'b1-c3',
+    source: 'b1',
     type: 'bezier',
-    target: 'a2',
+    target: 'c3',
+    animated: true,
+  },
+  {
+    id: 'b1-c4',
+    source: 'b1',
+    type: 'bezier',
+    target: 'c4',
+    animated: true,
+  },
+  {
+    id: 'a1-c4',
+    source: 'a1',
+    type: 'bezier',
+    target: 'c4',
+    animated: true,
+  },
+  {
+    id: 'b1-d1',
+    source: 'b1',
+    type: 'bezier',
+    target: 'd1',
+    animated: true,
+  },
+  {
+    id: 'b1-d2',
+    source: 'b1',
+    type: 'bezier',
+    target: 'd2',
+    animated: true,
+  },
+  {
+    id: 'b2-d2',
+    source: 'b2',
+    type: 'bezier',
+    target: 'd2',
+    animated: true,
+  },
+  {
+    id: 'b2-d3',
+    source: 'b2',
+    type: 'bezier',
+    target: 'd3',
+    animated: true,
+  },
+  {
+    id: 'a2-d4',
+    source: 'a2',
+    type: 'bezier',
+    target: 'd4',
+    animated: true,
+  },
+  {
+    id: 'b2-d4',
+    source: 'b2',
+    type: 'bezier',
+    target: 'd4',
+    animated: true,
   },
 ];
 
@@ -125,11 +252,11 @@ const HorizontalFlow = () => {
       onEdgesChange={onEdgesChange}
       onConnect={onConnect}
       fitView
-      attributionPosition="bottom-left"
+      attributionPosition="bottom-left" 
     >
       <div className="updatenode__controls">
         <div className="updatenode__checkboxwrapper">
-          <label>hidden:</label>
+          <label>Hidden EESB03:</label>
           <input
             type="checkbox"
             checked={nodeHidden}
