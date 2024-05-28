@@ -1,12 +1,64 @@
 
 
 import React, { useEffect, useState, useCallback } from 'react';
-import ReactFlow, { useNodesState, useEdgesState, addEdge } from 'reactflow';
+import ReactFlow, { Handle, Position, useNodesState, useEdgesState, addEdge } from 'reactflow';
 import 'reactflow/dist/style.css';
 
 import './updatenode.css';
 
+const ALevel = ({ data, isConnectable }) => {
+  return (
+    <div style={{width: '150px'}}>
+      <Handle type="target" id='t' position={Position.Top} isConnectable={isConnectable} style={{opacity: 0}} />
+      <Handle type="target" id='l' position={Position.Left} isConnectable={isConnectable} style={{opacity: 0}} />
+      <Handle type="source" id='b' position={Position.Bottom} isConnectable={isConnectable} style={{opacity: 0}} />
+      <Handle type="source" id='r' position={Position.Right} isConnectable={isConnectable} style={{opacity: 0}} />
+      <input
+        type="text"
+        value={data.label1}
+        onChange={(e) => data.onChange('label1', e.target.value)}
+        style={{ display: 'block', width: '100%', color: '#FFF', boxSizing: 'border-box', border: '0', borderRadius: '0', backgroundColor: '#DE2833', padding: '5px', textAlign: 'center' }}
+      />
+      <input
+        type="text"
+        value={data.label2}
+        onChange={(e) => data.onChange('label2', e.target.value)}
+        style={{ display: 'block', width: '100%', fontSize: '10px', boxSizing: 'border-box', border: '0', borderRadius: '0', backgroundColor: '#FFF', padding: '12px', textAlign: 'center' }}
+      />
+    </div>
+  );
+};
+
+const BLevel = ({ data, isConnectable }) => {
+  return (
+    <div style={{width: '150px'}}>
+      <Handle type="target" id='t' position={Position.Top} isConnectable={isConnectable} style={{opacity: 0}} />
+      <Handle type="target" id='l' position={Position.Left} isConnectable={isConnectable} style={{opacity: 0}} />
+      <Handle type="source" id='b' position={Position.Bottom} isConnectable={isConnectable} style={{opacity: 0}} />
+      <Handle type="source" id='r' position={Position.Right} isConnectable={isConnectable} style={{opacity: 0}} />
+      <input
+        type="text"
+        value={data.label1}
+        onChange={(e) => data.onChange('label1', e.target.value)}
+        style={{ display: 'block', width: '100%', color: '#FFF', boxSizing: 'border-box', border: '0', borderRadius: '0', backgroundColor: '#DE2833', padding: '5px', textAlign: 'center' }}
+      />
+      <input
+        type="text"
+        value={data.label2}
+        onChange={(e) => data.onChange('label2', e.target.value)}
+        style={{ display: 'block', width: '100%', fontSize: '10px', boxSizing: 'border-box', border: '0', borderRadius: '0', backgroundColor: '#FFF', padding: '12px', textAlign: 'center' }}
+      />
+    </div>
+  );
+};
+
 const initialNodes = [
+  {
+    id: 'a4',
+    type: 'a_level',
+    data: { label1: 'CHMB41', label2: 'Organic Chemistry I'},
+    position: { x: 0, y: -100 },
+  },
   {
     id: 'a1',
     draggable: false,
@@ -131,6 +183,14 @@ const initialNodes = [
 
 const initialEdges = [
   {
+    id: 'a4-b1',
+    source: 'a4',
+    sourceHandle: 'r',
+    type: 'bezier',
+    target: 'b1',
+    animated: true,
+  },
+  {
     id: 'a3-a2',
     source: 'a3',
     type: 'bezier',
@@ -251,6 +311,9 @@ const HorizontalFlow = () => {
       onNodesChange={onNodesChange}
       onEdgesChange={onEdgesChange}
       onConnect={onConnect}
+      nodeTypes={{ a_level: ALevel, b_level: BLevel }}
+      elementsSelectable={false}
+      style={{ backgroundColor: '#F2F4F7' }}
       fitView
       attributionPosition="bottom-left" 
     >
